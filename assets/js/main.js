@@ -1,23 +1,22 @@
-import app from "./firebase/app.js"
+import {subscribeToHellfireClube} from "./firebase/app.js"
 
 console.log(app)
 
-const txtName = document.getElementById('txtName')
-const txtEmail = document.getElementById('txtEmail')
-const txtLevel = document.getElementById('txtLevel')
-const txtCharacter = document.getElementById('txtCharacter')
-const btnSubscribe = document.getElementById('btnSubscribe')
+(function main() {
+    const txtName = document.getElementById('txtName')
+    const txtEmail = document.getElementById('txtEmail')
+    const txtLevel = document.getElementById('txtLevel')
+    const txtCharacter = document.getElementById('txtCharacter')
 
+    document.getElementById('btnSubscribe').addEventListener('click', async () => {
+        const subscribe = {
+            name: txtName.value,
+            email: txtEmail.value,
+            level: txtLevel.value,
+            character: txtCharacter.value
+        }
 
-btnSubscribe.addEventListener('click', () => {
-    const subscription = {
-        name: txtName.value,
-        email: txtEmail.value,
-        level: txtLevel.value,
-        character: txtCharacter.value
-    }
-
-
-    // Salvar no Banco de Dados
-    console.log(subscription)
-})
+        const id = await subscribeToHellfireClube(subscribe)
+        alert(`Inscrição ${id} adicionada com sucesso!`)
+    })
+})()
